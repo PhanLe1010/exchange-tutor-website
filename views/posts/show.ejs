@@ -1,0 +1,90 @@
+<% include ../partials/header %> 
+
+<style>
+    body{
+        background-color: #e3e5e3;
+    }
+</style>
+
+
+<div class="container showPage" style="max-width: 900px; width: 100%; padding: 0;">
+    <div class="media" style= "background-color: white">
+          <div class="media-left media-top">
+                <a href="#">
+                  <img class="media-object" src="https://static.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg" alt="...">
+                </a>
+          </div>
+          <div class="media-body">
+                <h4 class="media-heading"><%=post.title%>  <spand class="pull-right" style="color: grey; font-size: 0.85em"><%=post.date.toDateString() %></spand></h4>
+                
+                <p>
+                    <%=post.content%>
+                </p>
+                
+                <p>Posted by: <spand style="color: #009b56"><%=post.author.fullName%></spand> </p>
+                <p>
+                    Subject: <spand style="color: #009b56"><%=post.subject %></spand> 
+                </p>
+                <% if(currentUser && post.author.id.equals(currentUser._id)){ %>
+                <div>
+                        <a href="/posts/<%=post._id%>/edit" class= "pull-right"><button class="btn btn-warning btn-xs" >Edit</button></a>
+                        <spand class="pull-right">&nbsp &nbsp</spand>
+                        <form style = "display:inline" action="/posts/<%=post._id%>?_method=DELETE"  method = "POST"  class= "pull-right">
+                            <button class="btn btn-danger btn-xs">Delete</button>
+                        </form>      
+                </div>    
+                <% }%>
+                 <!-- AddToAny BEGIN -->
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="margin-top: 10px; display: inline-block">
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_google_plus"></a>
+                </div>
+                
+                <hr>
+                <h3 style="text-align: center">Comments</h3>
+                <% post.comments.forEach(function(comment){ %>
+                    <div class="media">
+                          <div class="media-left media-top">
+                                <a href="#">
+                                  <img class="media-object commentAva" src="http://cdn.playbuzz.com/cdn/534d452c-2f74-4ab7-848b-9a52da2d408a/52f60395-8542-4da4-8266-ad6982ada1b7.jpg" alt="...">
+                                </a>
+                          </div>
+                          <div class="media-body">
+                                <h4 class="media-heading"><spand style="color: #009b56"><%=comment.author.fullName%>  <spand class="pull-right" style="color: grey; font-size: 0.85em"><%=comment.date.toDateString() %></spand></h4>
+                                
+                                <p>
+                                    <%=comment.content%>
+                                </p>
+                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <p>
+                                        <a href="/posts/<%=post._id%>/comments/<%=comment._id%>/edit" class= "pull-right"><button class="btn btn-warning btn-xs" >Edit</button></a>
+                                        <spand class="pull-right">&nbsp &nbsp</spand>
+                                        <form style = "display:inline" action="/posts/<%=post._id%>/comments/<%=comment._id%>?_method=DELETE"  method = "POST"  class= "pull-right">
+                                            <button class="btn btn-danger btn-xs">Delete</button>
+                                        </form>    
+                                    </p>
+                                <% } %>
+                            </div>
+                    </div>
+                
+                <% }); %>
+                
+                <hr>
+                <h4 style="text-align: center; margin-bottom: 20px">Add a new comment!</h4>
+                
+                <form style = "max-width: 600px; width: 90%; margin: 0 auto;"action="/posts/<%=post._id%>/comments" method="POST">
+                    <div class="form-group">
+                        <textarea rows="5" class="form-control"  name="comment[content]" placeholder="Enter comment here."></textarea> 
+                    </div> 
+                    <div class="form-group">
+                              <button class="btn btn-primary btn-large form-control">Submit!</button>
+                    </div>
+                </form>
+    </div>
+</div>
+</div>
+
+
+<% include ../partials/footer %> 

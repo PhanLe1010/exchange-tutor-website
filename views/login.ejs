@@ -1,0 +1,21 @@
+<% include ./partials/header %> 
+<h2 style="text-align: center; margin-bottom: 20px; margin-top: 5vh">Login To Tutor Exchange</h2>
+
+<form style = "max-width: 600px; width: 90%; margin: 0 auto;"action="/login" method="POST">
+  <div class="form-group">
+      <input type="text" name="username" placeholder="enter username" required class="form-control">
+  </div>  
+  <div class="form-group">
+      <input type="password" name="password" class="form-control" placeholder="enter password" required>
+  </div>  
+
+  <div class="form-group">
+      <button class="btn btn-primary btn-large form-control">Login</button>
+  </div>
+
+</form>
+
+
+
+
+<% include ./partials/footer %> 

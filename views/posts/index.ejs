@@ -1,0 +1,74 @@
+<% include ../partials/header %> 
+     <header class="jumbotron" id="indexJumbotron">
+         <div class="container" style = "max-width: 1000px; width: 100%; color: black; 	
+                 text-shadow: 0px 0px 30px rgba(255, 255, 255, 1),
+                              0px 0px 30px rgba(255, 255, 255, 0.8),
+                              0px 0px 20px rgba(255, 255, 255, 0.6);" >
+             <h2>Welcome To Tutor Exchange Site!</h2>
+             <p>View all posts here or choose a subject.</p>
+             <p>
+                <a class="btn btn-primary btn-large" href="/posts/new">Add A New Post</a>
+             </p>
+         </div>
+     </header>
+     
+<!--List of Subject-->
+<div class="container" style="text-align: center">
+    <div class="btn-group " role="group" id="subjectList">
+          <a href="/posts"type="button" id="AllPosts" class="btn btn-default">All Posts</a>
+          <a href="/posts/sortBy/Math"type="button" id="Math" class="btn btn-default">Math</a>
+          <a href="/posts/sortBy/English"type="button" id="English" class="btn btn-default">English</a>
+          <a href="/posts/sortBy/Physics" type="button" id="Physics" class="btn btn-default">Physics</a>
+          <a href="/posts/sortBy/ComputerScience"type="button" id="ComputerScience" class="btn btn-default">Computer Science</a>
+          <div class="btn-group" role="group">
+                <button  id="Other" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Others
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="Other">
+                  <li><a href="/posts/sortBy/Psychology" >Psychology</a></li>
+                  <li><a href="/posts/sortBy/Art" >Art</a></li>
+                </ul>
+          </div>
+    </div>
+</div>
+     
+<div class="container" style="max-width: 800px; width: 100%; padding: 0;">
+    <%if (posts.length == 0) { %>
+        <h1 style= "text-align: center">There is nothing here yet!</h1>
+    <% } else {%>
+    <%for(count = posts.length-1; count >=0; count--){ %>
+    <div class="media" style="margin-top: 10px; margin-bottom:10px">
+          <div class="media-left media-top">
+                <a href="#">
+                  <img class="media-object" src="https://static.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg" alt="...">
+                </a>
+          </div>
+          <div class="media-body">
+                <h4 class="media-heading"><%=posts[count].title %><spand class="pull-right" style="color: grey; font-size: 0.85em"><%=posts[count].date.toDateString() %></spand></h4>
+                
+                <p>
+                    <%=posts[count].content.substring(0, 300)+"..." %>
+                </p>
+                
+                <p>Posted by: <spand style="color: #009b56"><%=posts[count].author.fullName %></spand> <a href="/posts/<%=posts[count]._id%>">
+                    <% if (!posts[count].comments || posts[count].comments.length > 0) {%>
+                        <button class ="btn btn-primary btn-sm pull-right"> View Replies </button>
+                    <% } else { %>
+                        <button class ="btn btn-primary btn-sm pull-right" style = "background-color: red;"> Add Reply </button>
+                    <% }%>
+                </a>
+                </p>
+                <p>Subject: <spand style="color: #009b56"><%=posts[count].subject %></spand></p>
+          </div>
+
+    </div>
+              
+    <% }; } %>
+    
+    
+
+</div>
+
+
+<% include ../partials/footer %> 

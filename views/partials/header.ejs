@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+	<title>EVC Tutor Exchange</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/button.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/icon.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/label.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+	<link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css ">
+	<link rel="stylesheet" type="text/css" href="/stylesheet/main.css">
+</head>
+<body>
+	<div id= "contentOfOnePage">
+    <nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+				<a class="navbar-brand" href="/"><i class="fa fa-linode" aria-hidden="true"></i> EVC Tutor Exchange</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-nav-demo">
+				<ul class="nav navbar-nav">
+					<li><a href="/posts">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+					<li><a href="/FAQs">FAQs</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav navbar-right">
+		                    <% if(!currentUser){ %>
+								<li><a href="/register">Sign up  <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+								<li><a href="/login">Login  <i class="fa fa-sign-in" aria-hidden="true"></i> </a></li>
+		                    <% } else { %>
+		                        <li><a href="#">Logged in as: <%= currentUser.username %></a></li>
+		                        <li><a href="/logout">Logout  <i class="fa fa-sign-out" aria-hidden="true"></i> </a></li>
+		                    <% } %>
+		                </ul>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+<!-------------This is for Flash message---------------------->
+    <div class="container">
+        
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert" style = "Font-weight: bold; margin-top: 20px">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-info" role="alert" style = "Font-weight: bold; margin-top: 20px">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+	
+	
+
